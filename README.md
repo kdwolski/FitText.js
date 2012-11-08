@@ -1,3 +1,5 @@
+**Note**: This is a forked version of the [real project](https://github.com/davatron5000/FitText.js). This version introduces options to set another compressor value for shorter text in the targeted set. This is handy if the required compressor agression level between short and long text varies widely.
+
 # FitText.js, a jQuery plugin for inflating web type
 FitText makes font-sizes flexible. Use this plugin on your responsive design to achieve scalable headlines that fill the width of the parent element.
 
@@ -25,6 +27,9 @@ FitText now allows you to specify two optional pixel values: `minFontSize` and `
 
     $("#responsive_headline").fitText(1.2, { minFontSize: '20px', maxFontSize: '40px' })
 
+    // handle short text (15 characters or less) with a less agressive compressor value
+    $("#responsive_headline").fitText(3.5, { minFontSize: '20px', maxFontSize: '40px', shortKompressor: 0.5, shortLength: 15 })
+
 ## CSS Tips
 
 * Make sure your headline is `display: block;` or 	`display: inline-block;` with a specified width, i.e. `width: 100%`. 
@@ -33,6 +38,7 @@ FitText now allows you to specify two optional pixel values: `minFontSize` and `
 * Make sure your element is appended to document before setting fitText. e.g. `$('<div>').fitText()` will NOT work
 
 ## Changelog
+* `v 1.2` - shortKompressor & shortLength options and functionality.
 * `v 1.1` - FitText now ignores font-size and has minFontSize & maxFontSize options
 * `v 1.0.1` - Fix for broken font-size.
 * `v 1.0` - Initial Release

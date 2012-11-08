@@ -16,14 +16,22 @@
     // Setup options
     var compressor = kompressor || 1,
         settings = $.extend({
-          'minFontSize' : Number.NEGATIVE_INFINITY,
-          'maxFontSize' : Number.POSITIVE_INFINITY
+          'minFontSize'   : Number.NEGATIVE_INFINITY,
+          'maxFontSize'   : Number.POSITIVE_INFINITY,
+          'shortKompress' : false,
+          'shortLength'   : 10
         }, options);
 	
     return this.each(function(){
 
       // Store the object
       var $this = $(this); 
+      var tempCompressor = compressor;
+
+      // Adjust kompressor for short text
+      if( (settings.shortKompress) && ($this.text().length <= settings.shortLength) ){
+        compressor = parseFloat(settings.shortKompress);
+      }
         
       // Resizer() resizes items based on the object width divided by the compressor * 10
       var resizer = function () {
@@ -35,6 +43,9 @@
 				
       // Call on resize. Opera debounces their resize by default. 
       $(window).on('resize', resizer);
+
+      // reset compressor
+      compressor = tempCompressor;
       	
     });
 
